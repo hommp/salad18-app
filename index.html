@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="images/logoweb.png" />
+    <title>Salad 18</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Optional: Google Fonts -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Inter:400,600,700&display=swap"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+    <!-- Header -->
+    <header
+      id="header"
+      class="fixed w-full top-0 z-50 transition-colors duration-300 bg-transparent backdrop-blur-sm"
+    >
+      <nav
+        class="container mx-auto px-6 py-4 flex justify-between items-center"
+      >
+        <!-- Logo -->
+        <div class="flex items-center space-x-2">
+          <img class="w-14" src="images/logo.png" alt="Logo" />
+        </div>
+        <!-- Desktop Navigation -->
+        <div class="hidden md:flex items-center space-x-8" id="navButtons">
+          <button
+            onclick="scrollToSection('home')"
+            class="transition-colors duration-300 text-white hover:text-green-400"
+          >
+            Beranda
+          </button>
+          <button
+            onclick="scrollToSection('menu')"
+            class="transition-colors duration-300 text-white hover:text-green-400"
+          >
+            Menu
+          </button>
+          <button
+            onclick="scrollToSection('about')"
+            class="transition-colors duration-300 text-white hover:text-green-400"
+          >
+            Sejarah
+          </button>
+          <button
+            onclick="scrollToSection('contact')"
+            class="transition-colors duration-300 text-white hover:text-green-400"
+          >
+            Kontak
+          </button>
+        </div>
+        <!-- Mobile Menu Button -->
+        <div class="md:hidden">
+          <button
+            id="mobileMenuButton"
+            onclick="openMobileMenu()"
+            class="transition-colors duration-300 text-white"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-8 w-8"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Mobile Sidebar -->
+    <div
+      id="mobileSidebar"
+      class="fixed inset-y-0 left-0 w-64 bg-white shadow-lg transform -translate-x-full transition-transform duration-300 z-50"
+    >
+      <div class="p-6">
+        <div class="flex items-center justify-between mb-8">
+          <img class="w-14" src="images/logo.png" alt="Logo" />
+          <button onclick="closeMobileMenu()" class="text-gray-700">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-8 w-8"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+        <nav class="flex flex-col space-y-4">
+          <button
+            onclick="scrollToSection('home'); closeMobileMenu()"
+            class="text-gray-700 hover:text-green-500 transition-colors duration-300 text-lg text-left"
+          >
+            Beranda
+          </button>
+          <button
+            onclick="scrollToSection('menu'); closeMobileMenu()"
+            class="text-gray-700 hover:text-green-500 transition-colors duration-300 text-lg text-left"
+          >
+            Menu
+          </button>
+          <button
+            onclick="scrollToSection('about'); closeMobileMenu()"
+            class="text-gray-700 hover:text-green-500 transition-colors duration-300 text-lg text-left"
+          >
+            Sejarah
+          </button>
+          <button
+            onclick="scrollToSection('contact'); closeMobileMenu()"
+            class="text-gray-700 hover:text-green-500 transition-colors duration-300 text-lg text-left"
+          >
+            Kontak
+          </button>
+        </nav>
+      </div>
+    </div>
+
+    <script>
+      // Scroll ke section yang diinginkan
+      function scrollToSection(section) {
+        const target = document.getElementById(section);
+        if (target) {
+          target.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+
+      // Buka dan tutup mobile sidebar
+      function openMobileMenu() {
+        document
+          .getElementById("mobileSidebar")
+          .classList.remove("-translate-x-full");
+      }
+      function closeMobileMenu() {
+        document
+          .getElementById("mobileSidebar")
+          .classList.add("-translate-x-full");
+      }
+
+      // Ubah tampilan header dan ikon burger saat scroll
+      window.addEventListener("scroll", function () {
+        const header = document.getElementById("header");
+        const navButtons = document
+          .getElementById("navButtons")
+          .querySelectorAll("button");
+        const mobileMenuButton = document.getElementById("mobileMenuButton");
+
+        if (window.scrollY > 50) {
+          header.classList.add("bg-white", "shadow-sm");
+          header.classList.remove("bg-transparent");
+          navButtons.forEach((button) => {
+            button.classList.remove("text-white");
+            button.classList.add("text-gray-600");
+          });
+          mobileMenuButton.classList.remove("text-white");
+          mobileMenuButton.classList.add("text-gray-600");
+        } else {
+          header.classList.add("bg-transparent");
+          header.classList.remove("bg-white", "shadow-sm");
+          navButtons.forEach((button) => {
+            button.classList.remove("text-gray-600");
+            button.classList.add("text-white");
+          });
+          mobileMenuButton.classList.remove("text-gray-600");
+          mobileMenuButton.classList.add("text-white");
+        }
+      });
+    </script>
+
+    <!-- Hero Section / Beranda -->
+    <section id="home" class="relative overflow-hidden h-screen">
+      <div class="absolute inset-0">
+        <img
+          src="images/hero.jpg"
+          alt="Buah Segar"
+          class="w-full h-full object-cover brightness-50"
+        />
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"
+        ></div>
+      </div>
+      <div
+        class="relative z-10 container mx-auto px-4 sm:px-6 pt-24 md:pt-32 pb-16 text-center"
+      >
+        <h1
+          class="text-4xl md:text-6xl font-extrabold text-white mb-6 drop-shadow-2xl"
+        >
+          SALAD 18<br /><span class="text-green-400">PONOROGO</span>
+        </h1>
+        <p class="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto">
+          Temukan perpaduan sempurna bahan-bahan segar, dipilih dengan cermat,
+          dan disiapkan setiap hari untuk gaya hidup sehat Anda.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-6">
+          <button
+            onclick="scrollToSection('menu')"
+            class="bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-full transition transform hover:scale-105 shadow-lg"
+          >
+            Pesan Sekarang
+          </button>
+          <a
+            href="https://wa.me/6281234567890"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center justify-center bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-full transition transform hover:scale-105 shadow-lg"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6 mr-2"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M7 8h10M7 12h4m1 8a9 9 0 110-18 9 9 0 010 18z"
+              />
+            </svg>
+            Hubungi Kami
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="container mx-auto px-6 py-16">
+      <h2 class="text-3xl font-bold text-center mb-12">Menu Kami</h2>
+      <!-- Input Pencarian -->
+      <div class="mb-8 flex justify-center">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Cari menu..."
+          class="border border-gray-300 rounded-md px-4 py-2 w-full max-w-md"
+        />
+      </div>
+      <!-- Kartu Produk -->
+      <div
+        id="products"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+      >
+        <!-- Kartu produk akan dimuat secara dinamis -->
+      </div>
+      <!-- Pagination -->
+      <div id="pagination" class="mt-8 flex justify-center space-x-2">
+        <!-- Tombol pagination akan dimuat di sini -->
+      </div>
+    </section>
+
+    <!-- Modal Pesanan -->
+    <div
+      id="orderModal"
+      class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+    >
+      <div
+        class="bg-white p-8 rounded-lg max-w-md w-full transform transition-all scale-95"
+      >
+        <h4 class="text-2xl font-bold mb-6">Detail Pemesanan</h4>
+        <form id="orderForm" class="space-y-5">
+          <input type="hidden" id="productId" />
+          <div>
+            <label class="block text-sm font-medium text-gray-700"
+              >Produk:</label
+            >
+            <p id="productName" class="mt-1 font-semibold text-lg"></p>
+          </div>
+          <div>
+            <label
+              for="customerName"
+              class="block text-sm font-medium text-gray-700"
+              >Nama Anda</label
+            >
+            <input
+              type="text"
+              id="customerName"
+              required
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-green-500 focus:border-green-500"
+            />
+          </div>
+          <div>
+            <label
+              for="customerNotes"
+              class="block text-sm font-medium text-gray-700"
+              >Catatan Tambahan</label
+            >
+            <textarea
+              id="customerNotes"
+              required
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-green-500 focus:border-green-500"
+              placeholder="Masukkan catatan tambahan untuk pesanan Anda..."
+            ></textarea>
+          </div>
+          <div>
+            <label
+              for="quantity"
+              class="block text-sm font-medium text-gray-700"
+              >Jumlah</label
+            >
+            <input
+              type="number"
+              id="quantity"
+              min="1"
+              value="1"
+              required
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-green-500 focus:border-green-500"
+            />
+          </div>
+          <div class="flex justify-end space-x-4">
+            <button
+              type="button"
+              onclick="closeModal()"
+              class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-md transition"
+            >
+              Batal
+            </button>
+            <button
+              type="submit"
+              class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md transition"
+            >
+              Pesan melalui WhatsApp
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Sejarah / About Section -->
+    <section id="about" class="py-16 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold mb-4">Sejarah Usaha</h2>
+          <p class="text-gray-600 max-w-3xl mx-auto">
+            Dimulai sebagai usaha kecil pada tahun 2019, Salad 18 telah
+            berkembang dengan mengutamakan kualitas dan inovasi. Dengan resep
+            turun-temurun dan bahan-bahan segar, kami berkomitmen menyajikan
+            hidangan sehat yang memikat.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mt-12">
+          <!-- Card 1 -->
+          <div class="text-center p-6">
+            <div
+              class="bg-green-50 rounded-full p-4 w-20 h-20 mx-auto mb-4 flex items-center justify-center"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-10 w-10 text-green-400"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 18.343l-6.828-6.829a4 4 0 010-5.656z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">Dibuat dengan Cinta</h3>
+            <p class="text-gray-600">
+              Setiap mangkuk disiapkan dengan hati-hati dan perhatian terhadap
+              detail.
+            </p>
+          </div>
+          <!-- Card 2 -->
+          <div class="text-center p-6">
+            <div
+              class="bg-green-50 rounded-full p-4 w-20 h-20 mx-auto mb-4 flex items-center justify-center"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-10 w-10 text-green-400"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  d="M10 2a1 1 0 01.993.883L11 3v2.28a7.002 7.002 0 014.921 5.503l.005.124A2.5 2.5 0 0116.5 13H15a2 2 0 00-1.995 1.85L13 15v2a1 1 0 01-1.993.117L11 17v-2a2 2 0 00-1.85-1.995L9 13H7.5a2.5 2.5 0 01-2.5-2.5 2.5 2.5 0 011.079-2.062A7.002 7.002 0 0110 5.28V3a1 1 0 011-1z"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">Kualitas Utama</h3>
+            <p class="text-gray-600">
+              Kami hanya memilih bahan segar dengan kualitas terbaik.
+            </p>
+          </div>
+          <!-- Card 3 -->
+          <div class="text-center p-6">
+            <div
+              class="bg-green-50 rounded-full p-4 w-20 h-20 mx-auto mb-4 flex items-center justify-center"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-10 w-10 text-green-400"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10 4a3 3 0 100 6 3 3 0 000-6zm-6 8a6 6 0 0112 0H4z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">Pelanggan Puas</h3>
+            <p class="text-gray-600">
+              Ribuan pelanggan yang puas dan terus bertambah.
+            </p>
+          </div>
+        </div>
+        <!-- Misi -->
+        <div class="mt-16 bg-orange-50 rounded-2xl p-8">
+          <div class="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <h3 class="text-2xl font-bold mb-4">Misi Kami</h3>
+              <p class="text-gray-600 mb-4">
+                Kami berkomitmen menyediakan hidangan sehat, segar, dan bergizi
+                dengan inovasi pilihan. Visi kami adalah menjadi brand makanan
+                sehat yang dikenal secara nasional dan regional.
+              </p>
+              <p class="text-gray-600">
+                Kami terus berinovasi untuk menghadirkan produk berkualitas dan
+                pelayanan terbaik untuk Anda.
+              </p>
+            </div>
+            <div class="relative h-64 rounded-xl overflow-hidden">
+              <img
+                src="images/about.jpg"
+                alt="Buah Segar"
+                class="absolute inset-0 w-full h-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kontak Section -->
+    <section id="contact" class="bg-gradient-to-b from-white to-green-50 py-16">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Kontak Card 1 -->
+          <div
+            class="bg-white p-6 rounded-2xl shadow-lg transition transform hover:scale-105"
+          >
+            <div class="flex items-center mb-4">
+              <div
+                class="flex items-center justify-center h-12 w-12 rounded-full bg-green-50 mr-4"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 text-green-400"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M3 5h2l3.6 7.59a1 1 0 01-.21 1.13l-1.95 1.95a11.12 11.12 0 005.27 5.27l1.95-1.95a1 1 0 011.13-.21L19 19v2a1 1 0 01-1 1h-2C8.82 22 2 15.18 2 7V5z"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-gray-800">Hubungi Kami</h3>
+            </div>
+            <div class="space-y-2">
+              <a
+                href="https://wa.me/6281335688509"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-gray-600 hover:text-green-500 transition-colors duration-300"
+              >
+                +62 813 3568 8509
+              </a>
+            </div>
+          </div>
+          <!-- Kontak Card 2 -->
+          <div
+            class="bg-white p-6 rounded-2xl shadow-lg transition transform hover:scale-105"
+          >
+            <div class="flex items-center mb-4">
+              <div
+                class="flex items-center justify-center h-12 w-12 rounded-full bg-green-50 mr-4"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 text-green-400"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 8v4l3 3"
+                  />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 4a8 8 0 100 16 8 8 0 000-16z"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-gray-800">Jam Buka</h3>
+            </div>
+            <div class="space-y-2">
+              <p class="text-gray-600 text-base">
+                Senin - Sabtu<br />
+                09:00 - 21:00
+              </p>
+              <p class="text-gray-600 text-base">
+                Minggu<br />
+                09:00 - 17:00
+              </p>
+            </div>
+          </div>
+          <!-- Kontak Card 3 -->
+          <div
+            class="bg-white p-6 rounded-2xl shadow-lg transition transform hover:scale-105"
+          >
+            <div class="flex items-center mb-4">
+              <div
+                class="flex items-center justify-center h-12 w-12 rounded-full bg-green-50 mr-4"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 text-green-400"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 11c1.656 0 3-1.344 3-3s-1.344-3-3-3-3 1.344-3 3 1.344 3 3 3z"
+                  />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 22s8-4.5 8-10.5S15.5 2 12 2 4 7.5 4 11.5 12 22 12 22z"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-gray-800">
+                Cabang Operasional
+              </h3>
+            </div>
+            <div class="flex flex-col space-y-2">
+              <a
+                href="https://maps.google.com/?q=Ponorogo%2C+Jl.+Basuki+Rahmad+No.36%2C+Surodikraman%2C+Ponorogo"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-gray-600 hover:text-green-500 transition-colors duration-300"
+              >
+                <span class="text-gray-800 font-semibold">Ponorogo,</span> Jl.
+                Basuki Rahmad No.36, Surodikraman, Ponorogo
+              </a>
+              <a
+                href="https://maps.google.com/?q=Jember%2C+Jl.+Mastrip+No.63%2C+Sumbersari%2C+Jember"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-gray-600 hover:text-green-500 transition-colors duration-300"
+              >
+                <span class="text-gray-800 font-semibold">Jember,</span> Jl.
+                Mastrip No.63, Sumbersari, Jember (Seberang Fakultas Kedokteran
+                Unej)
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-white shadow-xl">
+      <div class="container mx-auto px-6 py-8">
+        <div
+          class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0"
+        >
+          <p class="text-gray-600 text-center">
+            © 2025 Salad 18. Hak cipta dilindungi.
+          </p>
+          <div class="flex space-x-4">
+            <a
+              href="https://www.facebook.com/yourpage"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-gray-600 hover:text-green-500 transition-colors duration-300"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                class="w-6 h-6"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M22.675 0h-21.35C.595 0 0 .6 0 1.338v21.324C0 23.4.595 24 1.325 24h11.495v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.658-4.788 1.325 0 2.466.099 2.798.143v3.24h-1.918c-1.504 0-1.797.716-1.797 1.764v2.316h3.59l-.467 3.622h-3.123V24h6.116C23.405 24 24 23.4 24 22.662V1.338C24 .6 23.405 0 22.675 0z"
+                />
+              </svg>
+            </a>
+            <a
+              href="https://www.instagram.com/yourpage"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-gray-600 hover:text-green-500 transition-colors duration-300"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                class="w-6 h-6"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 2.163c3.204 0 3.584.012 4.849.07 1.206.056 2.003.24 2.465.415a4.92 4.92 0 011.675 1.09 4.92 4.92 0 011.09 1.675c.175.462.359 1.259.415 2.465.058 1.265.07 1.645.07 4.849s-.012 3.584-.07 4.849c-.056 1.206-.24 2.003-.415 2.465a4.92 4.92 0 01-1.09 1.675 4.92 4.92 0 01-1.675 1.09c-.462.175-1.259.359-2.465.415-1.265.058-1.645.07-4.849.07s-3.584-.012-4.849-.07c-1.206-.056-2.003-.24-2.465-.415a4.92 4.92 0 01-1.675-1.09 4.92 4.92 0 01-1.09-1.675c-.175-.462-.359-1.259-.415-2.465C2.175 15.747 2.163 15.367 2.163 12s.012-3.584.07-4.849c.056-1.206.24-2.003.415-2.465A4.92 4.92 0 013.788 3.01 4.92 4.92 0 015.463 1.92c.462-.175 1.259-.359 2.465-.415C8.416 1.175 8.796 1.163 12 1.163M12 0C8.741 0 8.332.012 7.052.07 5.771.127 4.676.345 3.798.701a7.073 7.073 0 00-2.57 1.642A7.073 7.073 0 00.701 4.701c-.356.878-.574 1.973-.631 3.254C.012 8.332 0 8.741 0 12s.012 3.668.07 4.948c.057 1.281.275 2.376.631 3.254.357.878.829 1.644 1.642 2.57a7.073 7.073 0 002.57 1.642c.878.356 1.973.574 3.254.631C8.332 23.988 8.741 24 12 24s3.668-.012 4.948-.07c1.281-.057 2.376-.275 3.254-.631a7.073 7.073 0 002.57-1.642 7.073 7.073 0 001.642-2.57c.356-.878.574-1.973.631-3.254.058-1.28.07-1.689.07-4.948s-.012-3.668-.07-4.948c-.057-1.281-.275-2.376-.631-3.254A7.073 7.073 0 0020.202.701a7.073 7.073 0 00-2.57-1.642C16.754.345 15.659.127 14.378.07 13.098.012 12.689 0 12 0z"
+                />
+                <path
+                  d="M12 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a3.999 3.999 0 110-7.998 3.999 3.999 0 010 7.998zM18.406 4.594a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z"
+                />
+              </svg>
+            </a>
+            <a
+              href="https://tiktok.com/yourpage"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-gray-600 hover:text-green-500 transition-colors duration-300"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                class="w-6 h-6"
+                viewBox="0 0 24 24"
+              >
+                <path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Variabel global untuk produk dan pagination
+      let allProducts = [];
+      let currentPage = 1;
+      const productsPerPage = 6;
+
+      function renderProducts() {
+        const searchQuery = document
+          .getElementById("searchInput")
+          .value.toLowerCase();
+        const filteredProducts = allProducts.filter(
+          (product) =>
+            product.name.toLowerCase().includes(searchQuery) ||
+            product.description.toLowerCase().includes(searchQuery)
+        );
+        const totalPages =
+          Math.ceil(filteredProducts.length / productsPerPage) || 1;
+        if (currentPage > totalPages) currentPage = totalPages;
+        const start = (currentPage - 1) * productsPerPage;
+        const end = start + productsPerPage;
+        const productsToShow = filteredProducts.slice(start, end);
+
+        const productsContainer = document.getElementById("products");
+        productsContainer.innerHTML = "";
+        productsToShow.forEach((product) => {
+          const productCard = `
+            <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition hover:scale-105">
+              <img src="${product.image}" alt="${product.name}" class="w-full h-56 object-cover" />
+              <div class="p-5">
+                <h4 class="font-bold text-xl mb-2">${product.name}</h4>
+                <p class="text-gray-600 mb-4">${product.description}</p>
+                <div class="flex justify-between items-center">
+                  <span class="text-green-600 font-bold text-lg">Rp${product.price}</span>
+                  <button onclick="openOrderModal(${product.id}, '${product.name}', ${product.price})" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md transition">
+                    Pesan Sekarang
+                  </button>
+                </div>
+              </div>
+            </div>
+          `;
+          productsContainer.innerHTML += productCard;
+        });
+
+        // Render pagination
+        const paginationContainer = document.getElementById("pagination");
+        paginationContainer.innerHTML = "";
+        for (let i = 1; i <= totalPages; i++) {
+          paginationContainer.innerHTML += `<button onclick="goToPage(${i})" class="px-3 py-1 rounded-md border ${
+            i === currentPage
+              ? "bg-green-600 text-white"
+              : "bg-white text-gray-600 hover:bg-green-100"
+          }">${i}</button>`;
+        }
+      }
+
+      function goToPage(page) {
+        currentPage = page;
+        renderProducts();
+      }
+
+      document
+        .getElementById("searchInput")
+        .addEventListener("input", function () {
+          currentPage = 1;
+          renderProducts();
+        });
+
+      // Memuat produk dari server
+      fetch("get_products.php")
+        .then((response) => response.json())
+        .then((products) => {
+          allProducts = products;
+          renderProducts();
+        });
+
+      // Fungsi modal
+      function openOrderModal(productId, productName, price) {
+        document.getElementById("productId").value = productId;
+        document.getElementById("productName").textContent = productName;
+        document.getElementById("orderModal").classList.remove("hidden");
+      }
+
+      function closeModal() {
+        document.getElementById("orderModal").classList.add("hidden");
+      }
+
+      // Proses pemesanan via WhatsApp
+      document
+        .getElementById("orderForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const productName =
+            document.getElementById("productName").textContent;
+          const customerName = document.getElementById("customerName").value;
+          const customerNotes = document.getElementById("customerNotes").value;
+          const quantity = document.getElementById("quantity").value;
+          const message = `Pesanan Baru:\n\nProduk: ${productName}\nJumlah: ${quantity}\nNama: ${customerName}\nCatatan: ${customerNotes}`;
+          const whatsappNumber = "+6288989840119";
+          const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+            message
+          )}`;
+          window.open(whatsappUrl, "_blank");
+          closeModal();
+        });
+    </script>
+  </body>
+</html>
