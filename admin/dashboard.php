@@ -13,22 +13,22 @@ $stmt = $pdo->query("SELECT * FROM products");
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dashboard - Salad App</title>
+  <title>Dasbor Admin - Salad App</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 min-h-screen">
   <!-- Header -->
   <header class="bg-green-500 p-4 text-white shadow-md">
     <div class="container mx-auto">
-      <h1 class="text-3xl font-bold">Dashboard Admin</h1>
+      <h1 class="text-3xl font-bold">Dasbor Admin</h1>
     </div>
   </header>
 
-  <!-- Main Content -->
+  <!-- Konten Utama -->
   <main class="container mx-auto p-4">
     <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
       <h2 class="text-2xl font-semibold mb-4 md:mb-0">Produk</h2>
